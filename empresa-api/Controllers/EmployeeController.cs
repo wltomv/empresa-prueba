@@ -1,12 +1,14 @@
 using empresa_api.DTO.Entitys;
 using empresa_api.DTO.Request;
 using empresa_api.Services.EmployeeService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace empresa_api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles = ("User"))]
     public class EmployeeController : ControllerBase
     {
         private IEmployeeService employeeService;

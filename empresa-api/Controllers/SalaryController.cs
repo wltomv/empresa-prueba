@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using empresa_api.DTO.Entitys;
 using empresa_api.Services.SalaryService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace empresa_api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles = ("User"))]
     public class SalaryController : ControllerBase
     {
         private ISalaryService salaryService;
