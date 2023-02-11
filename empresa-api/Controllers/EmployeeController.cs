@@ -19,6 +19,14 @@ namespace empresa_api.Controllers
             return Ok(employees);
         }
 
+        [HttpGet("{employeeId}")]
+        public async Task<ActionResult<EmployeeDTO>> getEmployeeById(int employeeId){
+            var employee = await employeeService.GetEmployeeById(employeeId);
+
+            if(employee == null) return NotFound();
+            return Ok(employee);
+        }
+
         [HttpPost]
         public async Task<ActionResult<EmployeeDTO>> addEmployee([FromBody]NewEmployeeReq employee){
             var newEmployee= await employeeService.AddEmployee(employee);

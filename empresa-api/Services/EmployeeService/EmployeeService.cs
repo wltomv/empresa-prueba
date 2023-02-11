@@ -3,7 +3,7 @@ using empresa_api.DTO.Request;
 using empresa_api.Models;
 using Microsoft.EntityFrameworkCore;
 
-static class Constants{
+static class BonusConstants{
     public const int FIXEDBONUSID = 1; 
     public const int PATERNITYBONUSID = 2; 
 }
@@ -32,11 +32,11 @@ namespace empresa_api.Services.EmployeeService
                     await _context.SaveChangesAsync();
 
                     
-                    await _context.BonusEmployees.AddAsync(new BonusEmployee(){BonusId=Constants.FIXEDBONUSID, EmployeeId = newEmployee.Id });
+                    await _context.BonusEmployees.AddAsync(new BonusEmployee(){BonusId=BonusConstants.FIXEDBONUSID, EmployeeId = newEmployee.Id });
                     await _context.SaveChangesAsync();
 
                     if(req.Employee.NumberChildren > 0){
-                        await _context.BonusEmployees.AddAsync(new BonusEmployee(){BonusId=2, EmployeeId = newEmployee.Id });
+                        await _context.BonusEmployees.AddAsync(new BonusEmployee(){BonusId=BonusConstants.PATERNITYBONUSID, EmployeeId = newEmployee.Id });
                         await _context.SaveChangesAsync();
                     }
 
@@ -86,9 +86,9 @@ namespace empresa_api.Services.EmployeeService
             return  await _context.Employees.Where(x => x.Status==true ).Select( x => new EmployeeDTO{Id= x.Id, FullName=x.FullName, NumberChildren= x.NumberChildren, BaseSalary= x.BaseSalary }).ToListAsync();
         }
 
-        public EmployeeDTO GetEmployeeById(int id)
+        public async Task<EmployeeDTO?> GetEmployeeById(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Employees.Select(e => new EmployeeDTO{Id=e.Id,Dpi=e.Dpi,FullName = e.FullName, NumberChildren= e.NumberChildren, BaseSalary= e.BaseSalary}).FirstOrDefaultAsync(e => e.Id==id);
         }
     }
 }
