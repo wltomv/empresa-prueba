@@ -1,4 +1,5 @@
 using empresa_api.Models;
+using empresa_api.Services.EmployeeService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,10 +14,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Dependency injection
 var connectionString=DotNetEnv.Env.GetString("CONNECTIONSTRING");
 builder.Services.AddDbContext<companyContext>(
     o => o.UseSqlServer(connectionString)
     );
+
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
 var app = builder.Build();
 
