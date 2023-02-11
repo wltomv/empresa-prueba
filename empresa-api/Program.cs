@@ -1,5 +1,6 @@
 using empresa_api.Models;
 using empresa_api.Services.EmployeeService;
+using empresa_api.Services.SalaryService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,7 @@ builder.Services.AddDbContext<companyContext>(
     );
 
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<ISalaryService, SalaryService>();
 
 var app = builder.Build();
 
