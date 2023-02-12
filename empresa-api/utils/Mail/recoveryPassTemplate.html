@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<style>
+		.container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			gap: 1rem;
+			background-color: aliceblue;
+			border-radius: 10px;
+			padding: 10px;
+		}
+		.container > a {
+			padding: 10px;
+			background-color: bisque;
+			text-decoration: none;
+			color: black;
+			text-transform: uppercase;
+			border-radius: 10px;
+			transition: 0.3s ease;
+		}
+		.container > a:hover {
+			transform: scale(1.2);
+		}
+	</style>
+	<body>
+		<div class="container">
+			<p>
+				Recientemente has solicitado restablecer tu contraseña, por
+				favor haz clic en el boton correspondiente. En caso de que no
+				hayas sido tu quien solicito reestablecer, por favor ignora este
+				mensaje.
+			</p>
+			<a href="[enlace]">Cambiar contraseña</a>
+			<div>
+				<span style="font-size: 16px"
+					>Si el botón de cambiar contraseña no funciona por favor
+					copia y pega el siguiente enlace en tu navegador</span
+				>
+				<span style="font-size: 11px; color: blue"> [enlace] </span>
+			</div>
+		</div>
+	</body>
+</html>

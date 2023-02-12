@@ -11,7 +11,7 @@ namespace empresa_api.Models
         }
 
         public int Id { get; set; }
-        public string? Dpi { get; set; }
+        public string Dpi { get; set; } = null!;
         public string FullName { get; set; } = null!;
         public int NumberChildren { get; set; }
         public decimal BaseSalary { get; set; }

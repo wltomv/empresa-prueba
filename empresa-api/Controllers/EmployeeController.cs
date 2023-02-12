@@ -1,4 +1,4 @@
-using empresa_api.DTO.Entitys;
+using empresa_api.DTO.Single;
 using empresa_api.DTO.Request;
 using empresa_api.Services.EmployeeService;
 using Microsoft.AspNetCore.Authorization;

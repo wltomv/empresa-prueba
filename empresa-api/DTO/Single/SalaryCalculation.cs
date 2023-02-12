@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace empresa_api.DTO.Entitys
+namespace empresa_api.DTO.Single
 {
     public class SalaryCalculation
     {

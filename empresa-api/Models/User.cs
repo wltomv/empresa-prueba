@@ -16,7 +16,7 @@ namespace empresa_api.Models
         public string Password { get; set; } = null!;
         public string Email { get; set; } = null!;
         public DateTime BirthDate { get; set; }
-
+        public string? Token_recovery {get; set;} = null;
         public virtual ICollection<Employee> Employees { get; set; }
     }
 }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using empresa_api.DTO.Entitys;
+using empresa_api.DTO.Single;
 using empresa_api.Services.SalaryService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

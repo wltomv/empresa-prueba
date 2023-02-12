@@ -1,5 +1,5 @@
 using empresa_api.Constants;
-using empresa_api.DTO.Entitys;
+using empresa_api.DTO.Single;
 using empresa_api.Models;
 
 namespace empresa_api.Services.SalaryService

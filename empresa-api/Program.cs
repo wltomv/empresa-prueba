@@ -3,6 +3,7 @@ using empresa_api.Models;
 using empresa_api.Services.AuthService;
 using empresa_api.Services.EmployeeService;
 using empresa_api.Services.SalaryService;
+using empresa_api.utils.Mail;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -49,6 +50,8 @@ builder.Services.AddDbContext<companyContext>(
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<ISalaryService, SalaryService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddSingleton<MailSettings>();
+builder.Services.AddSingleton<Mailer>();
 
 var app = builder.Build();
 
