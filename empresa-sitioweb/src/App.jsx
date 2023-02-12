@@ -1,14 +1,11 @@
 import "./App.css";
-import CustomDatatable from "./components/CustomDatatable/CustomDatatable";
-import Navbar from "./components/Navbar/Navbar";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import routesConfig from "./routes";
 
 function App() {
-	return (
-		<div className="App">
-			<Navbar />
-			<CustomDatatable />
-		</div>
-	);
+	const router = createBrowserRouter(routesConfig);
+
+	return <RouterProvider router={router} />;
 }
 
 export default App;

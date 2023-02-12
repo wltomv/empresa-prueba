@@ -85,7 +85,6 @@ function CustomDatatable() {
 				onRowClicked={(row) => console.log(row)}
 				customStyles={customStyles}
 			></DataTable>
-			<h1>red</h1>
 		</div>
 	);
 }
