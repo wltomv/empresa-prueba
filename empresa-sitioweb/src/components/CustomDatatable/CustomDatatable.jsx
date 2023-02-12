@@ -3,9 +3,18 @@ import { getEmployees } from "../../api";
 import DataTable from "react-data-table-component";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { Button, Stack } from "react-bootstrap";
+import useModal from "../../hooks/useModal";
+import ModalContainer from "../../containers/ModalContainer/ModalContainer";
+import EmployeeDetails from "../EmployeeDetails/EmployeeDetails";
+import EmployeeForm from "../EmployeeForm/EmployeeForm";
 
 function CustomDatatable() {
 	const [employees, setEmployees] = useState([]);
+	const [currentEmployee, setCurrentEmployee] = useState({});
+	const [editEmployee, setEditEmployee] = useState({});
+
+	const [isOpen, openModal, closeModal] = useModal();
+	const [isOpenEdit, openModalEdit, closeModalEdit] = useModal();
 
 	const fetchEmployees = async () => {
 		const data = await getEmployees();
@@ -15,6 +24,16 @@ function CustomDatatable() {
 	useEffect(() => {
 		fetchEmployees();
 	}, []);
+
+	const onRowClick = (employee) => {
+		setCurrentEmployee(employee);
+		openModal();
+	};
+
+	const onEdit = (employee) => {
+		setEditEmployee(employee);
+		openModalEdit();
+	};
 
 	const columns = [
 		{
@@ -43,7 +62,12 @@ function CustomDatatable() {
 			cell: (row) => {
 				return (
 					<Stack direction="horizontal" gap={3}>
-						<Button variant="warning">
+						<Button
+							variant="warning"
+							onClick={() => {
+								onEdit(row);
+							}}
+						>
 							<AiFillEdit />
 						</Button>
 						<Button variant="danger">
@@ -80,19 +104,37 @@ function CustomDatatable() {
 	};
 
 	return (
-		<div>
-			<DataTable
-				columns={columns}
-				data={employees}
-				title="Empleados"
-				pagination
-				paginationComponentOptions={paginationOptions}
-				fixedHeader
-				fixedHeaderScrollHeight="500px"
-				onRowClicked={(row) => console.log(row)}
-				customStyles={customStyles}
-			></DataTable>
-		</div>
+		<>
+			<div>
+				<DataTable
+					columns={columns}
+					data={employees}
+					title="Empleados"
+					pagination
+					paginationComponentOptions={paginationOptions}
+					fixedHeader
+					fixedHeaderScrollHeight="500px"
+					onRowClicked={(row) => onRowClick(row)}
+					customStyles={customStyles}
+				></DataTable>
+			</div>
+			<ModalContainer
+				title={"Detalles del empleado"}
+				show={isOpen}
+				handleShow={openModal}
+				handleClose={closeModal}
+			>
+				<EmployeeDetails employee={currentEmployee} />
+			</ModalContainer>
+			<ModalContainer
+				title={"Editar Empleado"}
+				show={isOpenEdit}
+				handleShow={openModalEdit}
+				handleClose={closeModalEdit}
+			>
+				<EmployeeForm edit={true} employee={editEmployee} />
+			</ModalContainer>
+		</>
 	);
 }
 

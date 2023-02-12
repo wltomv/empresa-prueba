@@ -17,7 +17,7 @@ function ModalContainer({ children, title, show, handleShow, handleClose }) {
 				</Modal.Header>
 				<Modal.Body>{children}</Modal.Body>
 				<Modal.Footer>
-					<Button variant="primary">Guardar</Button>
+					{/* <Button variant="primary">Guardar</Button> */}
 				</Modal.Footer>
 			</Modal>
 		</>
