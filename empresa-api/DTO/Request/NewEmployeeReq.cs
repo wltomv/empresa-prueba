@@ -4,6 +4,6 @@ namespace empresa_api.DTO.Request
     public class NewEmployeeReq
     {
         public int Userid { get; set; }
-        public EmployeeDTO Employee { get; set; } = null!;
+        public EmployeeDTO? Employee { get; set; } = null!;
     }
 }
