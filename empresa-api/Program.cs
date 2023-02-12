@@ -53,6 +53,14 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddSingleton<MailSettings>();
 builder.Services.AddSingleton<Mailer>();
 
+string _MyCors = "Cors";
+builder.Services.AddCors(options => {
+    options.AddPolicy(_MyCors, b =>{
+        b.SetIsOriginAllowed(origin => new Uri(origin).Host== "localhost")
+        .AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -63,6 +71,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // app.UseHttpsRedirection();
+app.UseCors(_MyCors);
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
