@@ -1,2 +1,18 @@
 .App {
 }
+
+.flex__center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.p__opensans {
+	font-family: var(--font-alt);
+	color: var(--color-second);
+	font-weight: 400;
+	letter-spacing: 0.04em;
+	text-transform: capitalize;
+	line-height: 28px;
+	font-size: 16px;
+}

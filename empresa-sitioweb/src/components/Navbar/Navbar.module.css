@@ -1,0 +1,120 @@
+.app__navbar {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: var(--color-primary);
+	padding: 1rem 2rem;
+}
+
+.app__navbarLogo {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.app__navbarLogo img {
+	width: 150px;
+}
+
+.app__navbarLinks {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	list-style: none;
+}
+
+.app__navbarLinks li {
+	margin: 0 1rem;
+	cursor: pointer;
+}
+
+.app__navbarLinks li:hover {
+	transform: scale(1.2);
+	color: var(--color-third);
+}
+
+.app__navbarLogin {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.app__navbarLogin a {
+	text-decoration: none;
+	transition: 0.5s ease;
+}
+
+.app__navbarLogin a:hover {
+	border-bottom: 2px solid var(--color-third);
+}
+
+.app__navbarSmallscreen {
+	display: none;
+}
+
+.app__navbarSmallscreen_overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: var(--color-third);
+	transition: 0.5s ease;
+
+	flex-direction: column;
+	z-index: 5;
+}
+
+.app__navbarSmallscreen .hamburguer {
+	cursor: pointer;
+}
+
+.app__navbarSmallscreen_overlay .overlay__close {
+	font-size: 27px;
+	color: var(--color-golden);
+	cursor: pointer;
+
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+
+.app__navbarSmallscreen_links {
+	list-style: none;
+}
+
+.app__navbarSmallscreen_links li {
+	margin: 2rem;
+	cursor: pointer;
+	color: var(--color-golden);
+	font-size: 2rem;
+	text-align: center;
+	font-family: var(--font-base);
+}
+
+.app__navbarSmallscreen_links li:hover {
+	color: var(--color-white);
+}
+
+@media screen and (max-width: 1150px) {
+	.app__navbarLinks {
+		display: none;
+	}
+
+	.app__navbarSmallscreen {
+		display: flex;
+	}
+
+	.app__navbarLogin {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.app__navbar {
+		padding: 1rem;
+	}
+}
