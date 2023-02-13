@@ -83,7 +83,7 @@ namespace empresa_api.Services.EmployeeService
 
         public async Task<List<EmployeeDTO>?> GetAllEmployees()
         {
-            return  await _context.Employees.Where(x => x.Status==true ).Select( x => new EmployeeDTO{Id= x.Id, FullName=x.FullName, NumberChildren= x.NumberChildren, BaseSalary= x.BaseSalary }).ToListAsync();
+            return  await _context.Employees.Where(x => x.Status==true ).Select( x => new EmployeeDTO{Id= x.Id, Dpi=x.Dpi, FullName=x.FullName, NumberChildren= x.NumberChildren, BaseSalary= x.BaseSalary }).ToListAsync();
         }
 
         public async Task<EmployeeDTO?> GetEmployeeById(int id)
