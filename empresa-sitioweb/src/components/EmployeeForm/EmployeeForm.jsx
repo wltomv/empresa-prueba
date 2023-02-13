@@ -2,35 +2,41 @@ import { Button, Row, Col } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { postEmployee, putEmployee } from "../../api";
+import { postEmployee, putEmployee, getEmployees } from "../../api";
+import { setEmployees } from "../../state/actions";
+import { useDispatch } from "react-redux";
 import { toastProps } from "../../constants/toast.config";
 
 function EmployeeForm({ edit = false, employee = undefined }) {
+	const dispatch = useDispatch();
 	const { register, reset, handleSubmit } = useForm({
 		defaultValues: { ...employee },
 	});
+
+	const fetchEmployees = async () => {
+		const data = await getEmployees();
+		dispatch(setEmployees(data));
+	};
 
 	const onSubmit = async (data) => {
 		if (!edit) {
 			const res = await postEmployee(data);
 			if (res.status == 200) {
+				fetchEmployees();
 				reset();
 				toast.success("Empleado guardado con éxito", toastProps);
 			} else {
 				toast.error("Algo salió mal, intentalo mas tarde", toastProps);
 			}
 		} else {
-			console.log(data);
 			const res = await putEmployee(data);
 			if (res.status == 200) {
-				reset();
+				fetchEmployees();
 				toast.success("Empleado editado con éxito", toastProps);
 			} else {
 				toast.error("Algo salió mal, intentalo mas tarde", toastProps);
 			}
 		}
-
-		console.log(data);
 	};
 
 	return (

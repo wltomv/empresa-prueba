@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { deleteEmployee, getEmployees } from "../../api";
 import DataTable from "react-data-table-component";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
@@ -6,12 +6,14 @@ import { Button, Col, Row, Stack } from "react-bootstrap";
 import useModal from "../../hooks/useModal";
 import ModalContainer from "../../containers/ModalContainer/ModalContainer";
 import EmployeeDetails from "../EmployeeDetails/EmployeeDetails";
+import Salary from "../Salary/Salary";
 import EmployeeForm from "../EmployeeForm/EmployeeForm";
+import { setEmployees } from "../../state/actions";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { toastProps } from "../../constants/toast.config";
 
-function CustomDatatable() {
-	const [employees, setEmployees] = useState([]);
+function CustomDatatable({ content }) {
 	const [currentEmployee, setCurrentEmployee] = useState({});
 	const [selectedEmployee, setSelectedEmployee] = useState({});
 
@@ -19,14 +21,13 @@ function CustomDatatable() {
 	const [isOpenEdit, openModalEdit, closeModalEdit] = useModal();
 	const [isOpenDelete, openModalDelete, closeModalDelete] = useModal();
 
+	const employees = useSelector((state) => state.employees);
+	const dispatch = useDispatch();
+
 	const fetchEmployees = async () => {
 		const data = await getEmployees();
-		console.log(data);
-		setEmployees(data);
+		dispatch(setEmployees([...data]));
 	};
-	useEffect(() => {
-		fetchEmployees();
-	}, []);
 
 	const onRowClick = (employee) => {
 		setCurrentEmployee(employee);
@@ -43,17 +44,16 @@ function CustomDatatable() {
 		openModalDelete();
 	};
 
-	const onEmployee = async (id) => {
+	const onDeleteEmployee = async (id) => {
 		const res = await deleteEmployee(id);
 
 		if (res.status == 200) {
+			fetchEmployees();
 			closeModalDelete();
 			toast.success("Empleado eliminado con éxito", toastProps);
 		} else {
 			toast.error("Algo salió mal, intentalo mas tarde", toastProps);
 		}
-
-		delete console.log(res);
 	};
 
 	const columns = [
@@ -134,12 +134,12 @@ function CustomDatatable() {
 			<div>
 				<DataTable
 					columns={columns}
-					data={employees}
+					data={content}
 					title="Empleados"
 					pagination
 					paginationComponentOptions={paginationOptions}
 					fixedHeader
-					fixedHeaderScrollHeight="500px"
+					fixedHeaderScrollHeight="350px"
 					onRowClicked={(row) => onRowClick(row)}
 					customStyles={customStyles}
 				></DataTable>
@@ -151,6 +151,7 @@ function CustomDatatable() {
 				handleClose={closeModal}
 			>
 				<EmployeeDetails employee={currentEmployee} />
+				<Salary employeeId={currentEmployee.id} />
 			</ModalContainer>
 			<ModalContainer
 				title={"Editar Empleado"}
@@ -180,7 +181,9 @@ function CustomDatatable() {
 						<Button
 							variant="danger"
 							size="lg"
-							onClick={() => onEmployee(selectedEmployee.id)}
+							onClick={() =>
+								onDeleteEmployee(selectedEmployee.id)
+							}
 						>
 							Eliminar
 						</Button>
