@@ -32,6 +32,7 @@ namespace empresa_api.Services.SalaryService
             SalaryCalculation calculations = new SalaryCalculation(){
                 Iggs=decimal.Round((iggs),2),
                 Irtra=decimal.Round(irtra,2),
+                DecreeBonus= decreeBonus.Amount,
                 PaternityBonus=decimal.Round(paternityBonusValue,2),
                 TotalSalary=decimal.Round(totalSalary,2),
                 NetSalary=decimal.Round(netSalary,2)

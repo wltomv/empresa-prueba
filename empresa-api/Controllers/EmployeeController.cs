@@ -3,6 +3,7 @@ using empresa_api.DTO.Request;
 using empresa_api.Services.EmployeeService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace empresa_api.Controllers
 {
@@ -31,9 +32,15 @@ namespace empresa_api.Controllers
 
         [HttpPost]
         public async Task<ActionResult<EmployeeDTO>> addEmployee([FromBody]NewEmployeeReq employee){
-            var newEmployee= await employeeService.AddEmployee(employee);
-            if(newEmployee==null) return BadRequest();
-            return Ok(newEmployee);
+            var identity= HttpContext.User.Identity as ClaimsIdentity;
+
+
+            if(identity!=null){
+                var id = identity.Claims.FirstOrDefault(o => o.Type=="id")?.Value;
+                var newEmployee= await employeeService.AddEmployee(employee, Convert.ToInt16(id));
+                if(newEmployee!=null) return Ok(newEmployee);
+            }
+            return BadRequest();
         }
 
         [HttpPut]
@@ -52,4 +59,9 @@ namespace empresa_api.Controllers
             return NotFound();
         }
     }
+
+    // private string getUser(){
+    //     var identity= HttpContext.User.Identity as ClaimsIdentity;
+    //     return "";
+    // }
 }

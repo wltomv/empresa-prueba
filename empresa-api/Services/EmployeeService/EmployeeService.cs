@@ -14,7 +14,7 @@ namespace empresa_api.Services.EmployeeService
     {
         private readonly companyContext _context;
         public EmployeeService(companyContext context) => _context=context;
-        public async Task<EmployeeDTO?> AddEmployee(NewEmployeeReq req)
+        public async Task<EmployeeDTO?> AddEmployee(NewEmployeeReq req, int userid)
         {
             using(var dbContextTransaction = _context.Database.BeginTransaction()){
                 try{
@@ -23,7 +23,7 @@ namespace empresa_api.Services.EmployeeService
                     FullName = req.Employee.FullName,
                     NumberChildren= req.Employee.NumberChildren,
                     BaseSalary = req.Employee.BaseSalary,
-                    UserId = req.Userid,
+                    UserId = userid,
                     CreatedAt  = DateTime.Now,
                     Status = true
                     };

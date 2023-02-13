@@ -39,7 +39,7 @@ namespace empresa_api.Services.AuthService
                 _context.Entry(dbUser).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
 
-                var link= "http://localhost:3000/access/recovery/?token="+token;
+                var link= "http://localhost:5173/auth/recoveryPass/change?token="+token;
 
                 MailDefinition def = new MailDefinition(){
                     ToEmail =dbUser.Email,
@@ -63,7 +63,7 @@ namespace empresa_api.Services.AuthService
                 
                 if(dbUser == null)  throw new CustomError("Token invalido");
         
-                dbUser.Password=Encrypt.getPasswordHash(dbUser.Password);
+                dbUser.Password=Encrypt.getPasswordHash(pass);
                 dbUser.Token_recovery=null;
                 _context.Entry(dbUser).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
