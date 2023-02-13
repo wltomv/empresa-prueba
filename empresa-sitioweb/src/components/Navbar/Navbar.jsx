@@ -3,14 +3,22 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 import styles from "./Navbar.module.css";
+import { logout } from "../../auth/authentication";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
 	const [toggleMenu, setToggleMenu] = useState(false);
+	const navigate = useNavigate();
 
 	const routes = [
 		{ to: "/", text: "Empleados" },
 		{ to: "/palindromos", text: "Palíndromos" },
 	];
+
+	const logoutEvent = () => {
+		logout();
+		navigate("/auth/login");
+	};
 
 	return (
 		<nav className={styles.app__navbar}>
@@ -25,7 +33,13 @@ function Navbar() {
 				))}
 			</ul>
 			<div className={styles.app__navbarLogin}>
-				<a href="#login" className="p__opensans">
+				<a
+					href="/auth/login"
+					className="p__opensans"
+					onClick={() => {
+						logoutEvent();
+					}}
+				>
 					Cerrar sesión
 				</a>
 				<div />
@@ -57,7 +71,14 @@ function Navbar() {
 								</li>
 							))}
 							<li className="p__opensans">
-								<a href="/">Cerrar sesión</a>
+								<a
+									href="/auth/login"
+									onClick={() => {
+										logoutEvent();
+									}}
+								>
+									Cerrar sesión
+								</a>
 							</li>
 						</ul>
 					</div>

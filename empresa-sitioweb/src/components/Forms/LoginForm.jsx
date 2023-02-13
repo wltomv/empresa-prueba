@@ -1,5 +1,6 @@
 import { Button, Form, Card, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { loginRequest } from "../../api";
 import { toastProps } from "../../constants/toast.config";
@@ -8,11 +9,17 @@ import useModal from "../../hooks/useModal";
 
 function LoginForm() {
 	const { register, reset, handleSubmit } = useForm();
+	const navigate = useNavigate();
 
 	const onSubmit = async (data) => {
 		const res = await loginRequest(data);
 		if (res.status == 200) {
+			//TODO: TEMPORARY --> Replace to server-side authentication
+			const token = JSON.stringify(res.data);
+			localStorage.setItem("token", token);
 			toast.success("Bienvenido", toastProps);
+
+			navigate("/");
 		} else toast.error("Datos incorrectos", toastProps);
 	};
 

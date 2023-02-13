@@ -1,11 +1,18 @@
 import axios from "axios";
+import { getToken } from "../auth/authentication";
 
-const token = "";
+const token = JSON.parse(getToken());
 const headers = {
 	"Content-type": "application/json; charset=UTF-8",
-	Authorization: "Bearer " + token,
+	Authorization: `Bearer ${token}`,
 };
+
 export const getEmployees = () => {
+	const token = JSON.parse(getToken());
+	const headers = {
+		"Content-type": "application/json; charset=UTF-8",
+		Authorization: `Bearer ${token}`,
+	};
 	return axios
 		.get("http://localhost:5040/api/Employee", { headers })
 		.then((res) => res.data)

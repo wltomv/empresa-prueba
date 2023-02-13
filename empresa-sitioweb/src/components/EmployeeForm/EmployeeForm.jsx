@@ -72,7 +72,7 @@ function EmployeeForm({ edit = false, employee = undefined }) {
 					<Form.Group className="mb-3" controlId="salario">
 						<Form.Label>Salario base</Form.Label>
 						<Form.Control
-							type="number"
+							type="text"
 							placeholder="Salario base"
 							{...register("baseSalary", {
 								required: true,

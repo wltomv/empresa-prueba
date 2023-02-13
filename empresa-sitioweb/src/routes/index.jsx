@@ -6,6 +6,7 @@ import AppLayout from "../containers/AppLayout/AppLayout";
 import LoginPage from "../pages/LoginPage";
 import RecoveryPassPage from "../pages/RecoveryPassPage";
 import ChangePassPage from "../pages/ChangePassPage";
+import AuthRoute from "../auth/Auth";
 const routesConfig = [
 	{
 		path: "/auth/login",
@@ -20,7 +21,11 @@ const routesConfig = [
 		element: <ChangePassPage />,
 	},
 	{
-		element: <AppLayout />,
+		element: (
+			<AuthRoute>
+				<AppLayout />
+			</AuthRoute>
+		),
 		children: [
 			{
 				path: "/",
