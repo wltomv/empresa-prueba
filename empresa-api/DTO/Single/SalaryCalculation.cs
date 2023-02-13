@@ -9,6 +9,7 @@ namespace empresa_api.DTO.Single
     {
         public decimal Iggs { get; set; }
         public decimal Irtra { get; set; }
+        public decimal DecreeBonus {get; set;}
         public decimal PaternityBonus { get; set; }
         public decimal TotalSalary { get; set; }
         public decimal NetSalary { get; set; }
