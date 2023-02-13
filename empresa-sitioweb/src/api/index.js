@@ -43,3 +43,27 @@ export const deleteEmployee = (id) => {
 		.then((res) => res)
 		.catch((err) => console.log(err));
 };
+
+export const loginRequest = (user) => {
+	return axios
+		.post("http://localhost:5040/api/Auth/login", { ...user })
+		.then((res) => res)
+		.catch((err) => err);
+};
+
+export const recoveryPassRequest = (email) => {
+	return axios
+		.post("http://localhost:5040/api/Auth/recoveryPassword", { ...email })
+		.then((res) => res)
+		.catch((err) => err);
+};
+
+export const recoveryPassChangeRequest = (password, token) => {
+	return axios
+		.post(
+			`http://localhost:5040/api/Auth/recoveryPassword/change?token=${token}`,
+			{ password }
+		)
+		.then((res) => res)
+		.catch((err) => err);
+};

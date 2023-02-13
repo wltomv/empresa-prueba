@@ -3,12 +3,21 @@ import Employees from "../pages/Employees/Employees";
 import Palindrome from "../pages/Palindrome/Palindrome";
 import CustomDatatable from "../components/CustomDatatable/CustomDatatable";
 import AppLayout from "../containers/AppLayout/AppLayout";
-import LoginPage from "../pages/LoginPage/LoginPage";
-
+import LoginPage from "../pages/LoginPage";
+import RecoveryPassPage from "../pages/RecoveryPassPage";
+import ChangePassPage from "../pages/ChangePassPage";
 const routesConfig = [
 	{
-		path: "/login",
+		path: "/auth/login",
 		element: <LoginPage />,
+	},
+	{
+		path: "/auth/recoveryPass",
+		element: <RecoveryPassPage />,
+	},
+	{
+		path: "/auth/recoveryPass/change",
+		element: <ChangePassPage />,
 	},
 	{
 		element: <AppLayout />,
